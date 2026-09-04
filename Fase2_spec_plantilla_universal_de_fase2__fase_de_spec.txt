@@ -1,0 +1,138 @@
+# Especificación: [NOMBRE DEL PROYECTO] v[N]
+
+## 1. Objetivo y contexto de negocio
+[¿Qué problema resuelve y por qué importa? ¿Cómo se usa en la vida real?]
+
+## 2. Usuarios
+[¿Quién lo usa? ¿Qué sabe y qué no? ¿Hay alguien que recibe el resultado sin usar la app?]
+
+## 3. Escenarios de usuario (historias)
+- HU1 — Como [usuario], quiero [acción], para [beneficio].
+
+## 4. Requisitos funcionales
+- RF1. El sistema debe [comportamiento observable].   [QUÉ hace, no CÓMO. Sin tecnología.]
+
+## 5. Reglas de negocio (con ejemplos)
+[Las reglas que no se pueden saltar, cada una con un ejemplo concreto que se pueda comprobar.]
+
+## 6. Criterios de aceptación (verificables sin código)
+- CA1. [Algo que se mira en la app y se sabe si está bien con un sí/no.]
+
+## 7. Casos límite
+- CL1. ¿Qué pasa si [situación rara o vacía]?
+
+## 8. Fuera de alcance
+[Lo que esta versión NO hace, dicho explícitamente. La sección que impide que la IA se vaya por las ramas.]
+
+
+
+
+
+Explicación de las secciones de la plantilla
+============================================
+
+Basándose en una idea de un generador de presupuestos para un freelancer que no quiere guardar resultados en la nube solo botón de generar pdf (los personajes son freelancer y sus clientes): 
+" Soy diseñadora freelance y cada vez que un cliente me pide precio pierdo la tarde: abro un Excel viejo, copio el último presupuesto, cambio los conceptos a mano, calculo el IVA con el móvil y el resultado, encima, se ve poco profesional.
+
+Quiero una herramienta donde tenga configurados mi nombre, mi NIF, mis datos de contacto y mi logo, y una lista de mis servicios con su precio habitual. Y cuando me pidan un presupuesto: elijo el cliente, añado líneas (de mi lista o escritas a mano, con su cantidad y su precio), y la herramienta me calcula sola la base imponible, el IVA y, cuando toca, la retención de IRPF, y el total. Luego me lo descargo en PDF, con mi marca, y se lo mando yo por email.
+
+Los números no se pueden inventar: el IVA de mis servicios es el 21 %. La retención de IRPF es del 15 % (o del 7 % para nuevos autónomos) y solo se aplica cuando el cliente es una empresa o un autónomo; a un particular no se le retiene nunca. El total es la base más el IVA menos la retención. Los presupuestos quiero que se numeren solos, tipo 2026-001, empezando de nuevo cada año, y que indiquen una validez de 30 días.
+
+Ah, y que quede claro, esto es un presupuesto, no una factura; nada de facturación electrónica por ahora. No quiero cuentas ni contraseñas, ni guardar nada en la nube, que viva en mi ordenador. Solo euros. Y el email ya lo mando yo."
+
+
+
+
+Sección 1 - Objetivo y contexto de negocio
+Qué producir: 3–5 frases que respondan a: ¿qué problema resuelve?, ¿por qué importa?, ¿cómo se usa en la vida real? Incluye una escena concreta (el encargo te regala una, úsala o inventa la tuya). Cierra con una medida de éxito: ¿cuánto debería tardar el freelancer en emitir un presupuesto correcto?
+
+Prueba del cuñado: si alguien sin idea de tecnología no entiende esta sección, reescríbela.
+
+
+Sección 2 - Usuarios
+Qué producir: al menos dos perfiles. Relee la pista de la plantilla: "¿hay alguien que recibe el resultado sin usar la app?". Uno de tus usuarios no toca la aplicación jamás… y aun así una regla de negocio entera depende de qué tipo de persona es. Descríbelos: quiénes son, qué saben hacer y qué no.
+
+
+Sección 3 - Escenarios de usuario (historias)
+Qué producir: entre 4 y 6 historias con el formato exacto HUn — Como [usuario], quiero [acción], para [beneficio].
+
+Ejemplo resuelto (puedes usarlo como HU1):
+
+HU1 - Como freelancer, quiero configurar mi nombre, NIF, contacto y logo, para que mis presupuestos salgan con mi marca sin tener que ponerla cada vez.
+
+Cómo sacar el resto: cada cosa que la clienta dice querer hacer en el encargo esconde al menos una historia. Recórrelo párrafo a párrafo.
+
+Cuidado con: historias sin beneficio ("quiero un botón de descargar"). El beneficio es lo que justifica que la historia exista.
+
+
+Sección 4 - Requisitos funcionales
+Qué producir: entre 8 y 12 requisitos numerados (RF1, RF2…), cada uno con un comportamiento observable: algo que se puede ver pasar usando la app.
+
+Calibra con este par:
+
+❌ Mal: "RFx. El sistema usará almacenamiento local del navegador para el catálogo." (Eso es el CÓMO: tecnología.)
+
+✅ Bien: "RFx. Cuando el freelancer vuelva a abrir la aplicación, su catálogo y sus presupuestos deben seguir ahí." (Eso es el QUÉ: comportamiento. Cómo se consiga, no es asunto de la spec.)
+
+No te olvides de: los cálculos (base, IVA, retención, total), el tipo de cliente, la numeración, la validez, el contenido del PDF y poder editar líneas antes de generarlo.
+
+
+Sección 5 - Reglas de negocio (con ejemplos)
+La sección más importante de tu spec.
+
+Qué producir: las reglas fiscales y de numeración del encargo, y debajo un presupuesto de ejemplo completo, con 2 o 3 líneas inventadas por ti (servicios y precios los eliges tú), calculado a mano y al céntimo:
+
+Base imponible = suma de (cantidad × precio unitario)
+
+IVA = base × 21 %
+
+Retención de IRPF = base × 15 %
+
+Total = base + IVA − retención
+
+Además, indica cuánto valdría ese mismo presupuesto (a) con retención del 7 % y (b) para un cliente particular.
+
+Comprobación rápida de que lo has entendido: con una base de 1.000,00 €, el total con IVA 21 % y retención 15 % es 1.060,00 €. Si tu fórmula no da eso, revisa el signo de la retención. (Tu ejemplo debe usar otros números.)
+
+Cuidado con: copiar las reglas sin ejemplo. Una regla sin números no se puede verificar, y lo que no se puede verificar, la IA lo interpretará a su manera.
+
+
+Sección 6 - Criterios de aceptación
+Qué producir: entre 5 y 8 criterios (CA1, CA2…) que cualquiera pueda comprobar usando la app, con respuesta sí/no, sin leer código.
+
+Calibra con este par:
+
+❌ Mal: "CAx. Los cálculos deben ser correctos." (¿Correctos según quién? No es comprobable.)
+
+✅ Bien: "CAx. Con el presupuesto de ejemplo de la sección 5 y retención del 15 %, el total mostrado es exactamente [tu cifra] €." (Sí o no. Sin discusión.)
+
+Truco: tus mejores criterios saldrán de cruzar tu ejemplo numérico con las reglas: ¿qué pasa al activar la retención?, ¿y con un cliente particular?, ¿qué número recibe el segundo presupuesto del año?
+
+
+Sección 7 - Casos límite
+Qué producir: al menos 3 casos con el formato "¿Qué pasa si…?" y su respuesta, decidida por ti.
+
+Para arrancar, piensa en: un presupuesto sin ninguna línea, un servicio que no está en el catálogo, un cliente particular con la retención marcada por error.
+
+Y aquí, permiso oficial para no ser perfecto: si detectas un caso límite pero no sabes qué respuesta darle, no lo fuerces: pásalo a "Preguntas abiertas". Eso no es un fallo; es el método funcionando.
+
+
+Sección 8 - Fuera de alcance
+Qué producir: la lista de exclusiones que la clienta deja caer al final del encargo, dicha de forma explícita, y al menos un punto propio: algo que se te haya ocurrido durante la tarea, que suena a buena idea… y que precisamente por eso hay que dejar fuera de la v0 por escrito.
+
+Recuerda: esta sección es el freno de mano de la IA. Un "fuera de alcance" pobre es la puerta por la que se cuelan las funcionalidades fantasma.
+
+
+Sección 9 (extra) - Preguntas abiertas
+Añade al final un bloque que no está en la plantilla: "Preguntas abiertas".
+
+Qué producir: entre 3 y 6 preguntas numeradas (PA1, PA2…) con las decisiones que sabes que no has tomado. Recupera los "¿?" que marcaste al leer el encargo y las dudas que hayas ido aparcando por el camino.
+
+Por dónde suelen ir los huecos de este proyecto (no las respondas aquí, solo comprueba si te las habías planteado): ¿el IVA es fijo o editable?, ¿qué sale en el PDF si no hay logo?, ¿la numeración se puede corregir a mano?, ¿cómo se redondea exactamente?, ¿qué se ve la primera vez que se abre la app?
+
+Por qué importa: estas preguntas son, literalmente, lo que le llevarás a Spec Kit. En la práctica del módulo verás que /speckit-specify y /speckit-clarify te preguntarán cosas muy parecidas.
+
+
+
+Qué pasa después con esta spec :
+Dársela a Spec Kit con /speckit-specify: la herramienta la leerá, te hará preguntas (muchas te sonarán, porque las tendrás en tu lista de Preguntas abiertas) y de tus respuestas saldrá la especificación definitiva.
