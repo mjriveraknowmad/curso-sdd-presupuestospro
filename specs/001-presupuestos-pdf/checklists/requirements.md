@@ -31,8 +31,9 @@
 
 ## Notes
 
-- All 3 [NEEDS CLARIFICATION] markers resolved: logo blank space (Q1), profile required (Q2), onboarding wizard (Q3)
-- 3 new FRs added (FR-013, FR-014, FR-015) based on clarification answers
+- All 3 [NEEDS CLARIFICATION] markers resolved in specify session: logo blank space (Q1), profile required (Q2), onboarding wizard (Q3)
+- 3 clarifications resolved in this clarify session: rounding behavior (banking round at final step), budget lifecycle (editable after PDF), storage failure (error message, no recovery)
+- 3 FRs from specify session (FR-013, FR-014, FR-015) + 1 new FR-016 (storage error handling)
 - 5 user stories with P1-P5 priorities, each independently testable
-- 15 functional requirements, 6 edge cases, 6 success criteria, 10 assumptions
-- Numeric examples from user's input verified: 2.000 € base → 2.120,00 € (15%), 2.280,00 € (7%), 2.420,00 € (particular)
+- 16 functional requirements, 7 edge cases, 6 success criteria, 11 assumptions
+- Numeric examples verified: 2.000 € base → 2.120,00 € (15%), 2.280,00 € (7%), 2.420,00 € (particular)

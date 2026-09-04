@@ -111,10 +111,15 @@ Hoy, la escena real es esta: son las once de la noche, un cliente ha pedido prec
 
 Antes de redactar la especificación formal, hazme las preguntas que necesites para
 resolver cualquier ambigüedad. No implementes nada todavía.
+
+
 ========================================================================================
 
 
+/specify.clarify
 
+
+========================================================================================
 
 
 

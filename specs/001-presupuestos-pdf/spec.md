@@ -102,6 +102,7 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
 - **Logo no proporcionado**: El PDF muestra un espacio en blanco donde iría el logo. No se muestra placeholder ni se omite la zona; se reserva el espacio para mantener el layout consistente.
 - **Datos del freelancer incompletos al crear presupuesto**: No se permite crear presupuestos sin perfil completo. El sistema obliga a configurar nombre, NIF, dirección, teléfono y email antes de poder crear el primer presupuesto.
 - **Primera vez que se abre la app**: Se muestra un asistente paso a paso: primero configurar el perfil, luego el catálogo de servicios, y finalmente crear el primer presupuesto. El freelancer puede saltar el catálogo si lo desea.
+- **Almacenamiento local del navegador lleno o no disponible**: Se muestra un mensaje de error claro cuando falla el guardado. No hay mecanismo de recuperación automática ni copia de seguridad en esta versión.
 
 ## Requirements
 
@@ -116,23 +117,25 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
   - IVA = base imponible × 21% (tipo general de servicios profesionales en España).
   - Retención de IRPF (si el freelancer la activa) = base imponible × 15% o × 7%, según elija.
   - Total = base imponible + IVA − retención de IRPF.
+  - Redondeo: se aplica redondeo estándar (≥0,5 redondea arriba, <0,5 redondea abajo) una sola vez en el resultado final de cada importe (base, IVA, retención y total), sin redondeos intermedios por línea.
 - **FR-006**: Si el cliente es "particular", la retención de IRPF no se aplica en ningún caso, independientemente de la configuración del freelancer.
 - **FR-007**: El sistema debe numerar los presupuestos automáticamente con el formato AAAA-NNN (por ejemplo, 2026-001), reiniciando el contador cada año.
 - **FR-008**: El presupuesto debe mostrar la fecha de emisión y una validez de 30 días desde esa fecha.
-- **FR-009**: El sistema debe permitir editar o eliminar cualquier línea del presupuesto antes de generar el PDF, recalculando los totales automáticamente.
+- **FR-009**: El sistema debe permitir editar o eliminar cualquier línea del presupuesto en cualquier momento, incluso después de haber descargado el PDF, recalculando los totales automáticamente. El PDF generado es un snapshot del momento de la descarga.
 - **FR-010**: El sistema debe generar un PDF con el logo, los datos del freelancer y del cliente, el número, las fechas, la tabla de líneas y el desglose de base, IVA, retención y total.
 - **FR-011**: Cuando el freelancer vuelva a abrir la aplicación, su perfil, su catálogo y sus presupuestos deben seguir ahí (persistencia local).
 - **FR-012**: El sistema debe impedir la generación de PDF si el presupuesto no tiene ninguna línea, mostrando un aviso al freelancer.
 - **FR-013**: El sistema debe mostrar un asistente de configuración paso a paso la primera vez que se abre la app: perfil del freelancer, catálogo de servicios y creación del primer presupuesto. El freelancer puede saltar el paso del catálogo.
 - **FR-014**: El sistema debe impedir la creación de presupuestos hasta que el perfil del freelancer esté completo (nombre, NIF, dirección, teléfono y email).
 - **FR-015**: Si el freelancer no ha subido logo, el PDF debe mostrar un espacio en blanco reservado donde iría el logo, manteniendo el layout del documento.
+- **FR-016**: Si una operación de guardado falla por falta de espacio en el almacenamiento local del navegador, el sistema debe mostrar un mensaje de error claro y comprensible al freelancer. No se ofrece mecanismo de recuperación automática en esta versión.
 
 ### Key Entities
 
 - **Freelancer**: Nombre, NIF, dirección, teléfono, email, logo. Datos que aparecen en todos los presupuestos emitidos.
 - **Servicio (catálogo)**: Nombre y precio por defecto. Se reutiliza al crear líneas de presupuesto.
 - **Cliente**: Nombre, identificador fiscal (NIF/CIF), dirección, email, tipo (empresa/autónomo o particular). El tipo determina si se aplica retención de IRPF.
-- **Presupuesto**: Número (AAAA-NNN), fecha de emisión, validez (30 días), cliente asociado, líneas, base imponible, IVA, retención de IRPF, total, y si está activa la retención.
+- **Presupuesto**: Número (AAAA-NNN), fecha de emisión, validez (30 días), cliente asociado, líneas, base imponible, IVA, retención de IRPF, total, y si está activa la retención. No tiene estado de "finalizado"; el presupuesto permanece editable tras descargar el PDF.
 - **Línea de presupuesto**: Descripción, cantidad, precio unitario. Puede provenir del catálogo o ser libre.
 
 ## Success Criteria
@@ -140,11 +143,19 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
 ### Measurable Outcomes
 
 - **SC-001**: El freelancer puede crear un presupuesto completo (con perfil configurado y logo) en menos de 5 minutos.
-- **SC-002**: Los cálculos de base, IVA, retención y total son exactos al céntimo con el ejemplo de referencia (base 2.000 € → total 2.120,00 € con retención 15%, 2.280,00 € con retención 7%, 2.420,00 € sin retención).
+- **SC-002**: Los cálculos de base, IVA, retención y total son exactos al céntimo con el ejemplo de referencia (base 2.000 € → total 2.120,00 € con retención 15%, 2.280,00 € con retención 7%, 2.420,00 € sin retención), aplicando redondeo estándar en cada importe final.
 - **SC-003**: Al cambiar el tipo de cliente entre empresa/autónomo y particular, el total se recalcula correctamente y se refleja en menos de 1 segundo.
 - **SC-004**: El PDF generado contiene todos los campos requeridos (logo, datos, número, fechas, tabla, desglose) y es visualmente profesional.
 - **SC-005**: Al cerrar y reabrir la aplicación, el 100% de los datos (perfil, catálogo, presupuestos) persisten correctamente.
 - **SC-006**: Un usuario no técnico puede completar el flujo completo (configurar perfil → crear catálogo → generar presupuesto → descargar PDF) sin necesitar ayuda externa.
+
+## Clarifications
+
+### Session 2026-09-04
+
+- Q: How should the application round financial amounts when the result has more than 2 decimal places? → A: Standard banking round (≥0.5 up, <0.5 down), applied once at the final total step.
+- Q: Can a freelancer edit or add lines to a budget after they have already downloaded its PDF? → A: Yes, the budget stays editable. The PDF is a point-in-time snapshot; no concept of "finalized" status in v0.
+- Q: What should the application do when browser local storage is full or unavailable? → A: Show a clear error message when a save fails due to storage limits. No automatic backup or recovery mechanism in v0.
 
 ## Assumptions
 
