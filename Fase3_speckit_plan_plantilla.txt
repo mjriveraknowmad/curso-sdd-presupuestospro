@@ -1,0 +1,4 @@
+
+/speckit-plan
+
+Prioriza la simplicidad por encima de todo, según la constitution. Es una versión 1 que debe poder publicarse online enseguida y funcionar bien en el móvil. No añadas infraestructura que la spec no necesite (sin cuentas de usuario, sin base de datos en la nube en esta versión). Explica las decisiones importantes en lenguaje de negocio.
