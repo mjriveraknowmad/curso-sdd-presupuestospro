@@ -12,7 +12,7 @@ PresupuestosPro es una aplicación web con backend Node.js + Express + SQLite qu
 
 **Language/Version**: JavaScript ES2022+ (Node.js 18+)
 
-**Primary Dependencies**: Express (web framework), better-site3 (SQLite driver), jsPDF (PDF generation)
+**Primary Dependencies**: Express (web framework), better-sqlite3 (SQLite driver), jsPDF (PDF generation)
 
 **Storage**: SQLite (archivo local `.db` en el directorio del proyecto)
 

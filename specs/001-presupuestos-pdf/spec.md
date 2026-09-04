@@ -102,7 +102,7 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
 - **Logo no proporcionado**: El PDF muestra un espacio en blanco donde iría el logo. No se muestra placeholder ni se omite la zona; se reserva el espacio para mantener el layout consistente.
 - **Datos del freelancer incompletos al crear presupuesto**: No se permite crear presupuestos sin perfil completo. El sistema obliga a configurar nombre, NIF, dirección, teléfono y email antes de poder crear el primer presupuesto.
 - **Primera vez que se abre la app**: Se muestra un asistente paso a paso: primero configurar el perfil, luego el catálogo de servicios, y finalmente crear el primer presupuesto. El freelancer puede saltar el catálogo si lo desea.
-- **Almacenamiento local del navegador lleno o no disponible**: Se muestra un mensaje de error claro cuando falla el guardado. No hay mecanismo de recuperación automática ni copia de seguridad en esta versión.
+- **Base de datos SQLite llena o no disponible (disco lleno, permisos, corrupción)**: Se muestra un mensaje de error claro cuando falla una operación de guardado. No hay mecanismo de recuperación automática ni copia de seguridad en esta versión.
 
 ## Requirements
 
@@ -128,7 +128,7 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
 - **FR-013**: El sistema debe mostrar un asistente de configuración paso a paso la primera vez que se abre la app: perfil del freelancer, catálogo de servicios y creación del primer presupuesto. El freelancer puede saltar el paso del catálogo.
 - **FR-014**: El sistema debe impedir la creación de presupuestos hasta que el perfil del freelancer esté completo (nombre, NIF, dirección, teléfono y email).
 - **FR-015**: Si el freelancer no ha subido logo, el PDF debe mostrar un espacio en blanco reservado donde iría el logo, manteniendo el layout del documento.
-- **FR-016**: Si una operación de guardado falla por falta de espacio en el almacenamiento local del navegador, el sistema debe mostrar un mensaje de error claro y comprensible al freelancer. No se ofrece mecanismo de recuperación automática en esta versión.
+- **FR-016**: Si una operación de guardado en la base de datos SQLite local falla (disco lleno, permisos, corrupción), el sistema debe mostrar un mensaje de error claro y comprensible al freelancer. No se ofrece mecanismo de recuperación automática en esta versión.
 
 ### Key Entities
 
@@ -160,12 +160,12 @@ Como freelancer, quiero descargar el presupuesto como PDF con mi logo, número, 
 ## Assumptions
 
 - La aplicación se ejecuta en un navegador web moderno en el ordenador del freelancer.
-- Los datos se almacenan localmente en el navegador (localStorage o equivalente). No hay servidor ni sincronización en la nube.
+- Los datos se almacenan en un servidor local Node.js + Express con base de datos SQLite (archivo `.db` en el ordenador del freelancer). No hay servidor remoto ni sincronización en la nube.
 - El IVA es siempre el 21% (tipo general de servicios profesionales en España). No es editable en esta versión.
 - La retención de IRPF solo tiene dos opciones: 15% (general) o 7% (nuevos autónomos). El freelancer elige cuál usar, pero la aplicación no valida si le corresponde uno u otro.
 - La numeración de presupuestos se reinicia cada 1 de enero automáticamente.
 - La validez de 30 días es fija y no es editable.
 - El freelancer configura una única dirección fiscal. No se soportan múltiples direcciones o sedes.
 - Solo se soporta la moneda euro (€). No hay multidivisa.
-- El logo se almacena como imagen en la configuración local del navegador.
+- El logo se almacena como imagen (data URL base64) en la base de datos SQLite local.
 - Los presupuestos ya generados no se borran automáticamente. El freelancer gestiona su historial manualmente.

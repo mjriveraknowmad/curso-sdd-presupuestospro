@@ -90,7 +90,7 @@
 
 ### Implementation for User Story 2
 
-- [ ] T022 Create src/routes/services.js — GET, POST, PUT, DELETE /api/services per contracts/services.md
+- [ ] T022 [P] [US2] Create src/routes/services.js — GET, POST, PUT, DELETE /api/services per contracts/services.md
 - [ ] T023 [US2] Create src/public/js/pages/catalog.js — services table with add/edit/delete actions, empty state message, wired to /api/services
 - [ ] T024 [US2] Mount services router and service page into app (app.js routing + server.js)
 
@@ -113,9 +113,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T027 Create src/routes/clients.js — GET, POST, PUT, DELETE /api/clients per contracts/services.md
-- [ ] T028 Create src/routes/budgets.js — GET list, GET by id (with lines), POST (with numbering + totals), PUT (recalc totals), DELETE per contracts/services.md; enforce FR-014 (profile complete) and FR-006 (particular → no retención)
-- [ ] T029 Create src/routes/budget-lines.js — POST, PUT, DELETE /api/budgets/:budgetId/lines, recalculating budget totals on each change (FR-009)
+- [ ] T027 [P] [US3] Create src/routes/clients.js — GET, POST, PUT, DELETE /api/clients per contracts/services.md
+- [ ] T028 [US3] Create src/routes/budgets.js — GET list, GET by id (with lines), POST (with numbering + totals), PUT (recalc totals), DELETE per contracts/services.md; enforce FR-014 (profile complete) and FR-006 (particular → no retención)
+- [ ] T029 [P] [US3] Create src/routes/budget-lines.js — POST, PUT, DELETE /api/budgets/:budgetId/lines, recalculating budget totals on each change (FR-009)
 - [ ] T030 [P] [US3] Create src/public/js/pages/budget-form.js — client selector (from /api/clients or inline), retención toggle + 15%/7% selector, editable lines table (from catalog modal or manual row), live totals summary
 - [ ] T031 [P] [US3] Create src/public/js/pages/budget-list.js — list of budgets (número, fecha, cliente, total) with view/edit/delete and "Nuevo presupuesto" button (disabled if profile incomplete, FR-014)
 - [ ] T032 [US3] Mount clients, budgets, budget-lines routers and budget pages into app (server.js + app.js)
@@ -160,8 +160,8 @@
 
 ### Implementation for User Story 5
 
-- [ ] T038 Create src/services/pdf-generator.js — builds PDF with jsPDF: logo (or blank space FR-015), freelancer data, client data, numero, fechas, lines table, breakdown (base, IVA, retención if any, total)
-- [ ] T039 Create src/routes/pdf.js — GET /api/budgets/:id/pdf returning application/pdf with Content-Disposition filename `presupuesto-{numero}.pdf`; 400 if 0 lines (FR-012)
+- [ ] T038 [P] [US5] Create src/services/pdf-generator.js — builds PDF with jsPDF: logo (or blank space FR-015), freelancer data, client data, numero, fechas, lines table, breakdown (base, IVA, retención if any, total)
+- [ ] T039 [US5] Create src/routes/pdf.js — GET /api/budgets/:id/pdf returning application/pdf with Content-Disposition filename `presupuesto-{numero}.pdf`; 400 if 0 lines (FR-012)
 - [ ] T040 [US5] Add "Descargar PDF" action to budget pages that navigates to GET /api/budgets/:id/pdf (download), disabled when 0 lines
 
 **Checkpoint**: Product complete — PDF downloads with full professional content.
@@ -172,7 +172,7 @@
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T041 [P] Add error handling middleware for 404/500 returning JSON error messages (Spanish) per contracts/services.md
+- [ ] T041 [P] Add error handling middleware for 404/500 returning JSON error messages (Spanish) per contracts/services.md, including a clear message when a SQLite write fails due to disk space/permissions (FR-016)
 - [ ] T042 Run quickstart.md validation scenarios V1–V9 end-to-end and fix any gaps
 - [ ] T043 [P] Run full test suite (npm run test + npm run test:integration) and ensure all pass
 - [ ] T044 [P] Review UI copy for Spanish (es-ES) correctness across all screens
@@ -194,8 +194,8 @@
 
 - **US1 (P1)**: Can start after Foundational — No dependencies on other stories
 - **US2 (P2)**: Can start after Foundational — No dependencies on other stories
-- **US3 (P3)**: Depends on Foundational (calculations.js) + needs clients router + numbers from US4 (numbering.js already foundational). Budget pages consume catalog (US2) for "add from catalog"
-- **US4 (P4)**: Can start after Foundational (numbering.js) — No dependency on US3, but US3 consumes it. Can be implemented in parallel with US3
+- **US3 (P3)**: Depends on Foundational (calculations.js + numbering.js) + needs clients router + numbers from US4 (numbering wiring). Budget pages consume catalog (US2) for "add from catalog". **Note**: numbering.js is created in Foundational (T010); its wiring into budget POST (T034) lives in US4 — T028 (budgets POST) must either wait for T034 or include the numbering call directly. Implement US4 (T033–T035) before or in parallel with US3's POST path to avoid a dependency gap.
+- **US4 (P4)**: Can start after Foundational (numbering.js) — No dependency on US3. T034 wires numbering into budget creation; implement before finalizing T028's POST path.
 - **US5 (P5)**: Depends on US3 (budgets + PDF service needs budget data structure) + US4 (numero) + foundational (formatting)
 
 ### Within Each User Story
