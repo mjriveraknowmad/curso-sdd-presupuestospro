@@ -1,50 +1,63 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- Sync Impact Report
+  - Version change: (sin versión previa) -> 1.0.0
+  - Modified principles: N/A (adopción inicial)
+  - Added sections: Core Principles (5 principios), Idioma y Mercado, Privacidad de Datos, Governance
+  - Removed sections: N/A
+  - Follow-up TODOs: ninguno
+-->
+
+# PresupuestosPro Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simplicidad ante todo
+Ante dos soluciones de igual alcance, se elige siempre la más simple. Es una versión 1:
+no se añade complejidad anticipada. Toda complejidad debe estar justificada por el
+presente o por una necesidad inmediata y verificable, no por especulación futura (YAGNI).
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Idioma y mercado
+Todo el producto se entrega en español de España. La moneda única admitida es el euro.
+No se soportan otros idiomas, locales ni monedas en esta versión.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Cero alcance fantasma
+Queda PROHIBIDO implementar cualquier funcionalidad que no esté escrita en la spec.
+Si durante el desarrollo surge una idea nueva, se documenta y se propone; no se construye
+sin pasar antes por el proceso de especificación y aprobación.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Verificable por una persona no técnica
+Cada criterio de éxito debe poder comprobarse usando la aplicación, sin leer código.
+Todo criterio debe formularse como una acción observable (p. ej. "el botón X muestra Y")
+que cualquier persona pueda ejecutar y confirmar.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Datos del usuario con respeto
+Se pide al usuario solo la información imprescindible para la función solicitada. No se
+introducen claves ni secretos en el código. No se almacenan, registran ni exponen datos
+personales o financieros más allá de lo necesario.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Alemance
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Esta versión cubre la generación de presupuestos en PDF para freelancers. Cualquier otro
+flujo (facturación, contabilidad, facturas electrónicas, etc.) queda fuera del alcance de
+esta versión y requiere una nueva spec.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Privacidad de Datos
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Solo se recogen los datos necesarios para crear un presupuesto (datos del freelancer, del
+cliente, partidas y precios). No se piden credenciales, ni se generan ni guardan claves o
+secretos en el código fuente. Los datos no utilizados deben descartarse.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Esta constitución prevalece sobre cualquier otra práctica del proyecto. Toda enmienda
+debe documentarse aquí, seguir las normas de versionado y registrar su motivo.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+- **Procedimiento de enmienda**: proponer el cambio, registrar la justificación y actualizar
+  este documento antes de aplicar cambios de desarrollo derivados.
+- **Política de versionado**: se sigue SemVer (MAJOR.MINOR.PATCH). MAJOR si se elimina o
+  redefine un principio; MINOR si se añade un principio o se amplía materialmente una
+  sección; PATCH para aclaraciones, redacción o correcciones no semánticas.
+- **Revisión de cumplimiento**: cada tarea o revisión debe comprobar que el trabajo respeta
+  los 5 principios; cualquier desviación se documenta y justifica.
+- Todo criterio de éxito debe ser comprobable por una persona no técnica mediante la app.
+
+**Version**: 1.0.0 | **Ratified**: 2026-09-04 | **Last Amended**: 2026-09-04
