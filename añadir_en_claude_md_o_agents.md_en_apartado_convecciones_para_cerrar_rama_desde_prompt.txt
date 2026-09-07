@@ -1,0 +1,1 @@
+Cuando te pida "cerrar la feature", ejecuta: verificar working tree limpio y commitear pendientes, correr tests (parar si fallan), checkout master, merge --no-ff de la rama de la feature con mensaje "Merge feature NNN: ", borrar la rama local, y mostrar git log --oneline --graph -10.
