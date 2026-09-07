@@ -1,0 +1,1 @@
+Actualiza la tabla de `specs/README.md` —la fila de esta spec (número, nombre, qué aporta, estado, rama) y, si sustituye o modifica algo de una spec anterior, anótalo en el estado de LAS DOS; revisa todas mis specs porque es la inicialización del fichero `README.md`.
