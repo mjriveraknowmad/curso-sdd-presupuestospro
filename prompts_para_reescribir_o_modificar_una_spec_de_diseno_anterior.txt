@@ -1,0 +1,66 @@
+Prompt para el análisis de una captura  de la aplicación
+-----------------------------------------------------------
+Haz de director de arte exigente. Critica esta interfaz y dame las 7 razones concretas por las que NO parece una aplicación de 2026. Sé específico en cada una: tipografía, color, espaciado, jerarquía visual, componentes, estados y densidad. Nada de generalidades: señala elementos exactos de la captura. Aún no propongas soluciones.
+
+
+
+
+
+Tras lo anterior, para que proponga cambios
+---------------------------------------------
+Proponme 3 direcciones visuales para esta app, claramente distintas entre sí. Cada una en 5 líneas: nombre, dos referencias de productos reales, paleta con códigos de color, tipografía concreta y qué sensación transmite a un cliente que recibe el presupuesto.
+
+No toques código: solo direcciones.
+
+
+
+
+Después de que nos proponga las 3 ideas antes 
+----------------------------------------------------------------------------------------------------------------------------
+
+Selecciono la opción C. Crea un documento de pre-especificación para enviarlo a GitHub speckit specification que detalle por completo esta opción. Creo que al menos debería tener las siguientes secciones. Añade alguna adicional si lo consideras oportuno.
+
+## Objetivo
+## Usuarios
+## Dirección visual elegida (decisión de producto: dirección A)
+## Reglas de diseño (tokens)
+## Criterios de aceptación verificables (sí/no)
+## Fuera de alcance
+
+
+
+
+
+Después de que genere el documento que le mandamos antes ( ya podemos rediseñar, haciendo referencia a la anterior spec de diseño, y al docu creado)
+----------------------------------------------------------------------------------------------------------------------------------------------------
+/speckit-specify
+
+Debes reescribir la spec existente: @specs/002-rediseno-visual-navegacion/spec.md, no crees una spec nueva, los criterios de modificación se encuentran en este documento pre-spec que yo he desarrollado: @specs/pre-spec-direccion-visual-fintech-nocturna.md . Ajusta la spec 002 por completo para que refleje todos los cambios de mi documento pre-spec.
+
+
+========================================================================================
+
+
+/speckit-plan 
+
+
+========================================================================================
+
+
+/speckit.tasks
+
+
+========================================================================================
+
+
+
+/speckit.analyze
+
+
+========================================================================================
+
+
+/speckit.implement
+
+
+========================================================================================
