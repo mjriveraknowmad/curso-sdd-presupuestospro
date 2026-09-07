@@ -1,0 +1,2 @@
+
+Quiero añadir la extension de git a specify (C:\Users\usuario\.local\bin\specify.exe extension add git)
